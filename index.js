@@ -1,28 +1,44 @@
+const express = require("express"); // Express will be used for the middleware to create various CRUD endpoints.
+const cors = require("cors"); // cors provides Express middleware to enable CORS with various options.
+const mongoose = require("mongoose"); // Mongoose for managing data in MongoDB using various queries.
+const bodyParser = require("body-parser");
+require("dotenv").config(); //Dotenv to manage a .env file.
 
-require('dotenv').config(); //Dotenv to manage a .env file.
-
-const express = require('express'); //Express will be used for the middleware to create various CRUD endpoints.
-const mongoose = require('mongoose'); //Mongoose for managing data in MongoDB using various queries.
-const routes = require('./routes/user.routes');
-
-// Lets connect mongoose to the database.
-const mongoString = process.env.DATABASE_URL;
-mongoose.connect(mongoString);
-const database = mongoose.connection;
-
-//Response messages for connection succes or failure
-database.on('error', (error) => { //Here, database.on means it will connect to the database, and throws any error if the connection fails. 
-    console.log(error)
-})
-
-database.once('connected', () => { //And database.once means it will run only one time. If it is successful, it will show a message that says Database Connected.
-    console.log('Database Connected');
-})
 const app = express();
-app.use('/api/users', routes)
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    "*",
+  ],
+};
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.json());
+const db = require("./models/server.js");
+const drUrl = require("./config/db.config.js");
+mongoose
+  .connect(drUrl.url, { useNewUrlParser: true })
+  .then(() => {
+    console.log("Connected to the database");
+  })
+  .catch((err) => {
+    console.log("Cannot connect to the database!", err);
+    process.exit();
+  });
 
-app.listen(3000, () => {
-    console.log(`Server Started at ${3000}`)
+// Default route
+app.get("/", (req, res) => {
+  res.json({message: "Welcome to Express MongoDB application."})
 })
+
+require("./routes/user.routes")(app);
+
+// Set port and listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running at port ${PORT}`);
+});
+
+
+

@@ -1,28 +1,22 @@
-
+module.exports = app => {
+  const user = require("../controllers/user.controller");
   const express = require("express");
-  const {
-    getAllUser,
-    addUser,
-    updateUser,
-    deleteUser,
-    getUserById,
-  } = require("../controllers/user.controller");
   const router = express.Router();
 
   //Post Method
-  router.post("/post", addUser);
+  router.post("/", user.create);
 
   //Get all Method
-  router.get("/getAll", getAllUser);
+  router.get("/", user.getAllUser);
 
   //Get by ID Method
-  router.get("/getOne/:id", getUserById);
+  router.get("/:id", user.findOne);
 
   //Update by ID Method
-  router.put("/update/:id", updateUser);
+  router.put("/:id", user.update);
 
   //Delete by ID Method
-  router.delete("/delete/:id", deleteUser);
+  router.delete("/:id", user.deleteUser);
 
- 
-  module.exports = router
+ app.use("/api/users", router);
+}

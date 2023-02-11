@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/BigguyFM1800/Second-Hand-App-API#readme",
   "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.9.1",
