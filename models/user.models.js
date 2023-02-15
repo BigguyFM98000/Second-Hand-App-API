@@ -9,7 +9,7 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
-        required: true
+        default: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGF3biUyMHNob3AlMjBsb2dvJTIwaW1hZ2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'
     },
     email: {
         type: String,

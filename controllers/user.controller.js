@@ -110,7 +110,5 @@ exports.findOne = async (req, res) => {
 }
 
 exports.getAllUser = getAllUsers;
-
-
 exports.deleteUser = deleteUser;
 
