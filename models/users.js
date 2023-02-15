@@ -7,6 +7,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    avatar: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
@@ -16,7 +20,9 @@ const userSchema = new Schema({
         type: String,
         required: true,
         minlength: 8,
-    }
+    },
+    allLoans: [{type: Schema.Types.ObjectId, ref: 'Loan'}],
+    
 });
 
 // const user = mongoose.model('User',userSchema);

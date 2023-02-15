@@ -10,19 +10,19 @@
   const router = express.Router();
 
   //Post Method
-  router.post("/post", addUser);
+  router.post("/", addUser);
 
   //Get all Method
-  router.get("/getAll", getAllUser);
+  router.get("/", getAllUser);
 
   //Get by ID Method
-  router.get("/getOne/:id", getUserById);
+  router.get("/:id", getUserById);
 
   //Update by ID Method
-  router.put("/update/:id", updateUser);
+  router.put("/:id", updateUser);
 
   //Delete by ID Method
-  router.delete("/delete/:id", deleteUser);
+  router.delete("/:id", deleteUser);
 
  
   module.exports = router
